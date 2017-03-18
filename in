@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/sh
 
 cd $1
 echo $BUILD_ID > build_id
