@@ -1,5 +1,7 @@
 # Metadata Resource
-This resource outputs Concourse.ci [build metadata](http://concourse.ci/implementing-resources.html#resource-metadata)
+[![Build Status](https://travis-ci.org/olhtbr/metadata-resource.svg?branch=master)](https://travis-ci.org/olhtbr/metadata-resource)
+
+This resource outputs [Concourse.ci](http://concourse.ci/) [build metadata](http://concourse.ci/implementing-resources.html#resource-metadata)
 to files to make annotations easier. One such use-case may be to add build links to the [body](https://github.com/concourse/github-release-resource#out-publish-a-release) of GitHub releases.
 
 As Concourse [documentation](http://concourse.ci/implementing-resources.html#resource-metadata) states, **avoid using this for versioning**. Use the [semver resource](https://github.com/concourse/semver-resource) instead.
