@@ -36,7 +36,7 @@ resources:
   - name: release
     type: github-release
     source:
-      user: my-github-user
+      owner: my-github-user
       repository: my-github-repo
       acces_token: github-access-token
       # other settings...
