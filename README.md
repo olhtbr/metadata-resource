@@ -7,11 +7,13 @@ to files to make annotations easier. One such use-case may be to add build links
 As Concourse [documentation](http://concourse.ci/implementing-resources.html#resource-metadata) states, **avoid using this for versioning**. Use the [semver resource](https://github.com/concourse/semver-resource) instead.
 
 ## Behavior
+:warning: Since 2.0.0 a **put** step has to used instead of a get to fix [this issue](https://github.com/olhtbr/metadata-resource/issues/1). If you want the old behaviour, use version 1.0.0 of this resource. :warning:
 
 ### `check`: Not used
+Always emits an empty version.
 
 ### `in`: Output metadata to files
-Used in a `get` step, the resource outputs `$BUILD_ID`, `$BUILD_NAME`, `$BUILD_JOB_NAME`, `$BUILD_PIPELINE_NAME`, `$BUILD_TEAM_NAME` and `$ATC_EXTERNAL_URL` to files `build_id`, `build_name`, `build_job_name`, `build_pipeline_name`, `build_team_name` and `atc_external_url` respectively.
+Outputs `$BUILD_ID`, `$BUILD_NAME`, `$BUILD_JOB_NAME`, `$BUILD_PIPELINE_NAME`, `$BUILD_TEAM_NAME` and `$ATC_EXTERNAL_URL` to files `build_id`, `build_name`, `build_job_name`, `build_pipeline_name`, `build_team_name` and `atc_external_url` respectively.
 
 ### `out`: Not used
 
@@ -25,6 +27,7 @@ resource_types:
     type: docker-image
     source:
       repository: olhtbr/metadata-resource
+      tag: 2.0.0
 
 resources:
   # The resource does not need any configuration
@@ -44,7 +47,7 @@ resources:
 jobs:
   - name: prepare-release
     plan:
-      - get: metadata
+      - put: metadata
       - get: release
 
       - task: setup-release-properties
