@@ -1,3 +1,8 @@
 #!/bin/sh
 
-echo "{}"
+cat <<EOF
+{
+  "version": { "version": "" },
+  "metadata": []
+}
+EOF

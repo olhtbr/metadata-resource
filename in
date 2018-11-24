@@ -10,7 +10,7 @@ echo $ATC_EXTERNAL_URL > atc_external_url
 
 cat <<EOF
 {
-  "version": { "timestamp": "$(date +%s)" },
+  "version": { "version": "" },
   "metadata": [
     { "name": "BUILD_ID", "value": "$BUILD_ID"},
     { "name": "BUILD_NAME", "value": "$BUILD_NAME"},
