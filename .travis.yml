@@ -13,6 +13,6 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
       docker push olhtbr/metadata-resource:latest;
-      docker tag olhtbr/metadata-resource:latest olhtbr/metadata-resource:2.0.0;
-      docker push olhtbr/metadata-resource:2.0.0;
+      docker tag olhtbr/metadata-resource:latest olhtbr/metadata-resource:2.0.1;
+      docker push olhtbr/metadata-resource:2.0.1;
     fi
