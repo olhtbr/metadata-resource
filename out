@@ -2,7 +2,7 @@
 
 cat <<EOF
 {
-  "version": { "version": "" },
+  "version": { "build_id": "$BUILD_ID" },
   "metadata": []
 }
 EOF
