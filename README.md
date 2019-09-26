@@ -27,7 +27,7 @@ resource_types:
     type: docker-image
     source:
       repository: olhtbr/metadata-resource
-      tag: 2.0.0
+      tag: 2.0.1
 
 resources:
   # The resource does not need any configuration
