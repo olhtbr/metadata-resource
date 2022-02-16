@@ -1,18 +1,25 @@
 sudo: required
+
 language: ruby
+
+dist: focal
+
+branches:
+  only:
+  - master
 
 services:
   - docker
 
 install: true
 
-script:
-  - docker build -t olhtbr/metadata-resource:latest .
+before_script:
+  - mkdir -p ~/.docker/cli-plugins
+  - wget -O - https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64 > ~/.docker/cli-plugins/docker-buildx
+  - chmod a+x ~/.docker/cli-plugins/docker-buildx
+  - docker run --rm --privileged docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
+  - docker buildx create --use --name mybuilder
 
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker push olhtbr/metadata-resource:latest;
-      docker tag olhtbr/metadata-resource:latest olhtbr/metadata-resource:2.0.1;
-      docker push olhtbr/metadata-resource:2.0.1;
-    fi
+script:
+  - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+  - docker buildx build --platform linux/amd64,linux/arm64 -t olhtbr/metadata-resource:latest -t olhtbr/metadata-resource:3.0.0 --push .
