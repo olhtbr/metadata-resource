@@ -7,6 +7,26 @@ echo $BUILD_JOB_NAME > build_job_name
 echo $BUILD_PIPELINE_NAME > build_pipeline_name
 echo $BUILD_TEAM_NAME > build_team_name
 echo $ATC_EXTERNAL_URL > atc_external_url
+set > metadata
+build_created_by=$(cat metadata | grep 'BUILD_CREATED_BY')
+if [ ! -z "$build_created_by" ]; then
+echo $BUILD_CREATED_BY > build_created_by
+cat <<EOF
+{
+  "version": { "build_id": "$BUILD_ID" },
+  "metadata": [
+    { "name": "BUILD_ID", "value": "$BUILD_ID"},
+    { "name": "BUILD_NAME", "value": "$BUILD_NAME"},
+    { "name": "BUILD_JOB_NAME", "value": "$BUILD_JOB_NAME"},
+    { "name": "BUILD_PIPELINE_NAME", "value": "$BUILD_PIPELINE_NAME"},
+    { "name": "BUILD_TEAM_NAME", "value": "$BUILD_TEAM_NAME"},
+    { "name": "ATC_EXTERNAL_URL", "value": "$ATC_EXTERNAL_URL"}
+    { "name": "BUILD_CREATED_BY", "value": "$BUILD_CREATED_BY"}
+  ]
+}
+EOF
+
+else
 
 cat <<EOF
 {
@@ -21,3 +41,4 @@ cat <<EOF
   ]
 }
 EOF
+fi
